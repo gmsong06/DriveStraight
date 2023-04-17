@@ -10,7 +10,4 @@ class Drivetrain(DifferentialDrive):
         self.encoder_right = encoder_right
 
     def move_forward(self, speed):
-        self.arcadeDrive(speed, 0)
-
-
-
+        self.arcadeDrive(0, speed)
