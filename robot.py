@@ -1,38 +1,31 @@
 from wpilib import TimedRobot
-from drivetrain import Drivetrain
-from wpilib import Spark, Encoder, Joystick
-from drivestraight import DriveStraight
+from robotcontainer import RobotContainer
 import wpilib
 import os
 
 class MyRobot(TimedRobot):
     def robotInit(self):
-        self.controller = Joystick(0)
-        self.drivetrain = Drivetrain(Spark(0), Spark(1), Encoder(4, 5), Encoder(6, 7))
-        self.drivetrain.encoder_right.setDistancePerPulse(0.0183)
-        self.drivetrain.encoder_left.setDistancePerPulse(0.0183)
-
-        self.drivetrain.encoder_right.reset()
-        self.drivetrain.encoder_left.reset()
-
-        self.drive_straight = DriveStraight(self.drivetrain)
-
+        self.container = RobotContainer()
     def robotPeriodic(self):
         pass
 
     def autonomousInit(self):
-        pass
+        self.auto = self.container.get_autonomous_routine()
 
     def autonomousPeriodic(self):
-        self.drive_straight.run()
+        self.auto.run()
+
+    def autonomousExit(self):
+        self.container.drivetrain.reset_gyro()
+        self.container.drivetrain.reset_encoders()
 
     def teleopInit(self):
         pass
 
     def teleopPeriodic(self):
-        forward = self.controller.getRawAxis(0)
-        turn = self.controller.getRawAxis(1)
-        self.drivetrain.arcadeDrive(forward, turn)
+        forward = self.container.controller.getRawAxis(0)
+        rotate = self.container.controller.getRawAxis(1)
+        self.container.drivetrain.arcadeDrive(forward, rotate)
 
 
 if __name__ == "__main__":
