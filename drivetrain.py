@@ -3,7 +3,7 @@ import wpilib
 import romi
 
 class Drivetrain(DifferentialDrive):
-    def __init__(self, left_motor, right_motor, encoder_left, encoder_right, gyro):
+    def __init__(self, left_motor, right_motor, encoder_left, encoder_right):
         super().__init__(left_motor, right_motor)
         self.left_motor = left_motor
         self.right_motor = right_motor
@@ -35,6 +35,8 @@ class Drivetrain(DifferentialDrive):
         """
 
         return self.gyro.getAngle()
+        # get y axis rotation
+        # return self.gyro.getAngleY()
 
     def reset_gyro(self):
         """

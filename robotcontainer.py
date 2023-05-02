@@ -3,6 +3,7 @@ from wpilib import Spark, Encoder
 from gyroturn import GyroTurn
 from drivestraight import DriveStraight
 from drivetrain import Drivetrain
+from autoroutine import AutoRoutine
 class RobotContainer:
 
     def __init__(self):
@@ -21,5 +22,5 @@ class RobotContainer:
         self.chooser.addOption("Turn 90", GyroTurn(self.drivetrain, 90))
         wpilib.SmartDashboard.putData("Auto Chooser", self.chooser)
 
-    def get_autonomous_routine(self):
+    def get_autonomous_routine(self) -> AutoRoutine:
         return self.chooser.getSelected()
