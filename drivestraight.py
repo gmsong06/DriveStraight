@@ -12,9 +12,9 @@ class DriveStraight(AutoRoutine):
         self.turn_pid_controller.setSetpoint(0)
         self.turn_pid_controller.setTolerance(0.05)
 
-        self.straight_pid_controller = PIDController(0.5, 0, 0)
+        self.straight_pid_controller = PIDController(0.5, 0, 0)  # need to tune
         self.straight_pid_controller.setSetpoint(self.goal)
-        self.straight_pid_controller.setTolerance(0.05)
+        self.straight_pid_controller.setTolerance(0.05)  # need to tune
 
     def run(self):
         difference = self.drivetrain.get_left_distance() - self.drivetrain.get_right_distance()
